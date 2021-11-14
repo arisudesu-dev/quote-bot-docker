@@ -1,0 +1,15 @@
+{
+  "adminId": 0,
+  "globalStickerSet": {
+    "ownerId": 0,
+    "name": "created_by_",
+    "save_sticker_count": 1
+  },
+  "adv": {
+    "moderationChat": 0
+  },
+  "donate": {
+    "chatId": 0,
+    "messageId": 0
+  }
+}

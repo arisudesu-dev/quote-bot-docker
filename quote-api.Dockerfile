@@ -13,3 +13,5 @@ WORKDIR /app
 ADD quote-api /app
 
 RUN npm install canvas@2.6.1 && npm install # TODO: canvas crashes if installed via npm install from package.json
+
+CMD [ "node", "index.js" ]

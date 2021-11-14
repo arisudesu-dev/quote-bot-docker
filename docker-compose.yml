@@ -1,0 +1,30 @@
+version: '3'
+
+volumes:
+  mongo-volume:
+    driver: local
+
+services:
+  mongo:
+    restart: always
+    image: mongo:4
+    volumes:
+      - mongo-volume:/data/db
+
+  bot:
+    build:
+      context: .
+      dockerfile: quote-bot.Dockerfile
+    restart: always
+    ports:
+      - '7000:7000'
+    env_file: quote-bot.env
+    volumes:
+      - ./bot-config.json:/app/config.json
+
+  api:
+    build:
+      context: .
+      dockerfile: quote-api.Dockerfile
+    restart: always
+    env_file: quote-api.env
