@@ -1,0 +1,3 @@
+[submodule "quote-api"]
+	path = quote-api
+	url = https://github.com/arisudesu-forks/quote-api
