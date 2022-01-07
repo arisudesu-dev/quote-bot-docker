@@ -2,7 +2,7 @@ FROM debian:bullseye
 
 RUN apt-get update \
     && apt-get install -y curl \
-    && curl -fsSL https://deb.nodesource.com/setup_12.x | bash - \
+    && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
     && apt-get install -y nodejs
 
 RUN apt-get update \
@@ -12,6 +12,7 @@ RUN apt-get update \
 WORKDIR /app
 ADD quote-api /app
 
-RUN npm install canvas@2.6.1 && npm install # TODO: canvas crashes if installed via npm install from package.json
+RUN npm install \
+    && sed -i 's#bindings.CanvasPatternInit.*##g' node_modules/canvas/lib/pattern.js
 
 CMD [ "node", "index.js" ]

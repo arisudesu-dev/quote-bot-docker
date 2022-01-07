@@ -2,7 +2,7 @@ FROM debian:bullseye
 
 RUN apt-get update \
     && apt-get install -y curl \
-    && curl -fsSL https://deb.nodesource.com/setup_12.x | bash - \
+    && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
     && apt-get install -y nodejs
 
 RUN apt-get update \
@@ -13,6 +13,6 @@ WORKDIR /app
 ADD quote-bot /app
 ADD libtdjson.so /app/helpers/tdlib/data/libtdjson.so
 
-RUN npm install && npm install sharp@0.23.4 # TODO: sharp crashes if installed via npm install from installed via package.json
+RUN npm install
 
 CMD [ "node", "index.js" ]
