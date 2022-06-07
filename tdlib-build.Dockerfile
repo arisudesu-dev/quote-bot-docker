@@ -1,16 +1,20 @@
 FROM debian:bullseye
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends make git zlib1g-dev libssl-dev gperf php-cli cmake g++ ca-certificates \
+    && apt-get install -y --no-install-recommends curl make git zlib1g-dev libssl-dev gperf php-cli cmake g++ ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 VOLUME /artifacts
 
+ENV TDLIB_VERSION 1.8.3
+ENV TDLIB_REV 054a823c1a812ee3e038f702c6d8ba3e6974be9c
+
 RUN mkdir /build \
-    && cd /build  \
-    && git clone https://github.com/tdlib/td.git \
+    && cd /build \
+    && curl -L -f -O https://github.com/tdlib/td/archive/${TDLIB_REV}.tar.gz \
+    && tar xzvf ${TDLIB_REV}.tar.gz \
+    && mv -T td-${TDLIB_REV} td \
     && cd td \
-    && git checkout v1.8.0 \
     && mkdir build \
     && cd build \
     && cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX:PATH=../tdlib .. \
