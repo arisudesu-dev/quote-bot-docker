@@ -12,7 +12,6 @@ RUN apt-get update \
 WORKDIR /app
 ADD quote-api /app
 
-RUN npm install \
-    && sed -i 's#bindings.CanvasPatternInit.*##g' node_modules/canvas/lib/pattern.js
+RUN npm install
 
 CMD [ "node", "index.js" ]
