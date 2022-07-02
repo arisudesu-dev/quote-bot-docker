@@ -11,6 +11,7 @@ RUN apt-get update \
 
 WORKDIR /app
 ADD quote-api /app
+ADD librlottie.so /usr/lib/librlottie.so
 
 RUN npm install
 
