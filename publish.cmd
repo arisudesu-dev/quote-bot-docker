@@ -1,6 +1,6 @@
 @echo off
 
-set BOT_VERSION=v0.32.5-arisu15
+set BOT_VERSION=v0.32.5-arisu16
 set API_VERSION=v0.10.7-arisu6
 set TDLIB_VERSION=1.8.4
 set RLOTTIE_VERSION=0.2
