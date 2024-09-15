@@ -15,5 +15,5 @@ ADD librlottie.so /usr/lib/librlottie.so
 
 RUN npm install
 
-ENTRYPOINT [ "/sbin/tini", "--", "node" ]
+ENTRYPOINT [ "/usr/bin/tini", "--", "node" ]
 CMD [ "index.js" ]

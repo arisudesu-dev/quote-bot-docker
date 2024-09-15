@@ -15,5 +15,5 @@ ADD libtdjson.so /app/helpers/tdlib/data/libtdjson.so
 
 RUN npm install
 
-ENTRYPOINT [ "/sbin/tini", "--", "node" ]
+ENTRYPOINT [ "/usr/bin/tini", "--", "node" ]
 CMD [ "index.js" ]
