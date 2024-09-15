@@ -1,7 +1,7 @@
 FROM debian:bullseye
 
 RUN apt-get update \
-    && apt-get install -y curl \
+    && apt-get install -y curl tini \
     && curl -fsSL https://deb.nodesource.com/setup_16.x | bash - \
     && apt-get install -y nodejs
 
@@ -15,4 +15,5 @@ ADD librlottie.so /usr/lib/librlottie.so
 
 RUN npm install
 
-CMD [ "node", "index.js" ]
+ENTRYPOINT [ "/sbin/tini", "--", "node" ]
+CMD [ "index.js" ]
