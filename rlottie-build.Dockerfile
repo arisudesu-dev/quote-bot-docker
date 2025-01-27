@@ -18,5 +18,3 @@ RUN mkdir /build \
     && meson --prefix=$(pwd)/rlottie -Dmodule=false build \
     && ninja -C build install \
     && cd ..
-
-CMD [ "cp", "-R", "/build/rlottie/rlottie", "/artifacts" ]

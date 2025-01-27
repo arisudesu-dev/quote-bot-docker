@@ -26,5 +26,3 @@ RUN mkdir /build \
     && cd .. \
     && php SplitSource.php --undo \
     && cd ..
-
-CMD [ "cp", "-R", "/build/td/tdlib", "/artifacts" ]

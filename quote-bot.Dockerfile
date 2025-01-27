@@ -11,7 +11,7 @@ RUN apt-get update \
 
 WORKDIR /app
 ADD quote-bot /app
-ADD libtdjson.so /app/helpers/tdlib/data/libtdjson.so
+COPY --from=tdlib-build:1.8.4 /build/td/tdlib/lib/libtdjson.so /app/helpers/tdlib/data/libtdjson.so
 
 RUN npm install
 

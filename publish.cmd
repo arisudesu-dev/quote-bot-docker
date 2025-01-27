@@ -12,18 +12,10 @@ echo API_VERSION=%API_VERSION%
 echo.
 
 echo Building TDLib
-docker build -t tdlib-build -f tdlib-build.Dockerfile . || goto :error
-docker run -v %cd%\build:/artifacts tdlib-build         || goto :error
-
-echo Copy prebuild TDLib
-cp build\tdlib\lib\libtdjson.so.%TDLIB_VERSION% libtdjson.so || goto :error
+docker build -t tdlib-build:%TDLIB_VERSION% -f tdlib-build.Dockerfile . || goto :error
 
 echo Building RLottie
-docker build -t rlottie-build -f rlottie-build.Dockerfile . || goto :error
-docker run -v %cd%\build:/artifacts rlottie-build           || goto :error
-
-echo Copy prebuild RLottie
-cp build\rlottie\lib\librlottie.so.%RLOTTIE_VERSION% librlottie.so || goto :error
+docker build -t rlottie-build:%RLOTTIE_VERSION% -f rlottie-build.Dockerfile . || goto :error
 
 echo Building quote-bot
 docker build -t ghcr.io/arisudesu-dev/quote-bot:latest -t ghcr.io/arisudesu-dev/quote-bot:%BOT_VERSION% -f quote-bot.Dockerfile . || goto :error
