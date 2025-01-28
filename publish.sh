@@ -16,11 +16,15 @@ error() {
 	exit 1
 }
 
-echo "Building TDLib"
-docker build -t "tdlib-build:$TDLIB_VERSION" -f tdlib-build.Dockerfile . || error $?
+[ -n "$(docker image ls -q "ghcr.io/arisudesu-dev/tdlib-build:$TDLIB_VERSION")" ] || {
+	echo "Building TDLib"
+	docker build -t "ghcr.io/arisudesu-dev/tdlib-build:$TDLIB_VERSION" -f tdlib-build.Dockerfile . || error $?
+}
 
-echo "Building RLottie"
-docker build -t "rlottie-build:$RLOTTIE_VERSION" -f rlottie-build.Dockerfile . || error $?
+[ -n "$(docker image ls -q "ghcr.io/arisudesu-dev/rlottie-build:$RLOTTIE_VERSION")" ] || {
+	echo "Building RLottie"
+	docker build -t "ghcr.io/arisudesu-dev/rlottie-build:$RLOTTIE_VERSION" -f rlottie-build.Dockerfile . || error $?
+}
 
 echo Building quote-bot
 docker build -t ghcr.io/arisudesu-dev/quote-bot:latest -t "ghcr.io/arisudesu-dev/quote-bot:$BOT_VERSION" -f quote-bot.Dockerfile . || error $?
