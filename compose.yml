@@ -1,0 +1,52 @@
+---
+services:
+  rlottie-build:
+    build:
+      args:
+        RLOTTIE_BUILD_NPROC: ${RLOTTIE_BUILD_NPROC}
+        RLOTTIE_REV: ${RLOTTIE_REV}
+        RLOTTIE_VERSION: ${RLOTTIE_VERSION}
+      context: .
+      dockerfile: rlottie-build.Dockerfile
+    image: ghcr.io/arisudesu-dev/rlottie-build:${RLOTTIE_VERSION}
+
+  tdlib-build:
+    build:
+      args:
+        TDLIB_BUILD_NPROC: ${TDLIB_BUILD_NPROC}
+        TDLIB_REV: ${TDLIB_REV}
+        TDLIB_VERSION: ${TDLIB_VERSION}
+      context: .
+      dockerfile: tdlib-build.Dockerfile
+    image: ghcr.io/arisudesu-dev/tdlib-build:${TDLIB_VERSION}
+
+  mongo:
+    image: mongo:${MONGO_VERSION}
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+
+  api:
+    build:
+      args:
+        RLOTTIE_VERSION: ${RLOTTIE_VERSION}
+      context: .
+      dockerfile: quote-api.Dockerfile
+    env_file: quote-api.env
+    restart: unless-stopped
+
+  bot:
+    build:
+      args:
+        TDLIB_VERSION: ${TDLIB_VERSION}
+      context: .
+      dockerfile: quote-bot.Dockerfile
+    ports:
+      - '7000:7000'
+    env_file: quote-bot.env
+    restart: unless-stopped
+    volumes:
+      - ./bot-config.json:/app/config.json
+
+volumes:
+  mongo-data:
