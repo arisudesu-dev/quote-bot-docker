@@ -1,4 +1,4 @@
-ARG TDLIB_VERSION
+ARG TDLIB_VERSION=1.8.4
 
 FROM ghcr.io/arisudesu-dev/tdlib-build:${TDLIB_VERSION} AS tdlib-build
 

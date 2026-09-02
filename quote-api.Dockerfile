@@ -1,4 +1,4 @@
-ARG RLOTTIE_VERSION
+ARG RLOTTIE_VERSION=0.2
 
 FROM ghcr.io/arisudesu-dev/rlottie-build:${RLOTTIE_VERSION} AS rlottie-build
 
