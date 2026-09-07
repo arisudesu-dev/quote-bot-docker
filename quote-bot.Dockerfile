@@ -9,8 +9,8 @@ RUN set -x \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
         ca-certificates curl \
-    && nodescript=$(curl -fsSL https://deb.nodesource.com/setup_16.x) \
-    && bash -x -c "$nodescript" \
+    && node_script=$(curl -fsSL https://deb.nodesource.com/setup_16.x) \
+    && bash -x -c "$node_script" \
     && apt-get update \
     && apt-get install -y --no-install-recommends \
         build-essential nodejs python3 tini \
